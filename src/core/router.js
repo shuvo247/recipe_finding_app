@@ -6,6 +6,7 @@ import Home from '../components/Home';
 import Login from '../components/auth/Login';
 import Register from '../components/auth/Register';
 import MainLayouts from '../components/layouts/MainLayouts';
+import registerAction from './actions/registerAction';
 
 export const router = createBrowserRouter([
     {
@@ -23,7 +24,8 @@ export const router = createBrowserRouter([
             },
             {
                 path : '/register',
-                element: <Register/>
+                element: <Register/>,
+                action: registerAction,
             }
         ]
     },
