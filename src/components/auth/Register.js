@@ -3,33 +3,38 @@ import {
   getAuth,
   updateProfile
 } from "firebase/auth";
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Form, useActionData } from 'react-router-dom';
 import '../../core/firebase';
+import { setUser } from '../../core/redux/slice/userSlice';
 
 const Register = () => {
-  const registerData = useActionData();
-  const [currentUser, setCurrentUser] = useState();
+  let registerData = useActionData();
+  const dispatch = useDispatch();
+  
   // signup function
   async function signup(email, password, username) {
     const auth = getAuth();
     await createUserWithEmailAndPassword(auth, email, password);
-
     // update profile
     await updateProfile(auth.currentUser, {
       displayName: username,
     });
-
     const user = auth.currentUser;
-    setCurrentUser({
-      ...user,
-    });
+    dispatch(setUser(user))
   }
   
-  if( registerData !== undefined ) {
-    signup( registerData.email,registerData.password,registerData.name )
-  }
-  console.log('current-user',currentUser);
+
+  useEffect(() => {
+    if( registerData !== undefined ) {
+      signup( registerData.email,registerData.password,registerData.name )
+    }
+    return () => {
+      registerData = undefined;
+    }
+  }, [registerData])
+  
   return (
     <section className="signup">
       <div className="container">
@@ -49,17 +54,13 @@ const Register = () => {
                 <label htmlFor="pass"><i className="zmdi zmdi-lock" /></label>
                 <input type="password" name="password" id="pass" placeholder="Password" />
               </div>
-              <div className="form-group">
-                <label htmlFor="re-pass"><i className="zmdi zmdi-lock-outline" /></label>
-                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" />
-              </div>
               <div className="form-group form-button">
                 <input type="submit" name="signup" id="signup" className="form-submit" defaultValue="Register" />
               </div>
             </Form>
           </div>
           <div className="signup-image">
-            <figure><img src="images/signup-image.jpg" alt="sing up image" /></figure>
+            <figure><img src="images/signup-image.jpg" alt="" /></figure>
           </div>
         </div>
       </div>

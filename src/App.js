@@ -4,9 +4,9 @@ import { router } from './core/router';
 
 function App() {
   return (
-    <RouterProvider router={router}>
-        <div>App</div>
-    </RouterProvider>
+      <RouterProvider router={router}>
+          <div>App</div>
+      </RouterProvider>
   );
 }
 
