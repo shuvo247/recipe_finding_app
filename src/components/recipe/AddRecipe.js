@@ -3,28 +3,23 @@ import React, { useEffect } from 'react';
 import { Form, useActionData } from 'react-router-dom';
 import db from "../../core/firebase";
 
-
 const AddRecipe = () => {
+
     let recipeData = useActionData();
     // Add recipe 
      const addItem = async (item) =>  {
         try {
-          // Add item to Firebase
-          const docs = await addDoc(collection(db, "items"), item);
-          console.log('docs',docs);
+            // Add item to Firebase
+            const docRef = await addDoc(collection(db, "items"), item);
+            // Include the generated ID in the payload
+            console.log('doc-ref',docRef);
         } catch (error) {
           console.error("Error adding item: ", error);
         }
     };
     useEffect(() => {
         if( recipeData !== undefined ) {
-            const docs = addDoc(collection(db, "items"), recipeData);
-            docs.then( (res) => {
-                console.log('res',res);
-            } ).catch( (error) => {
-                console.log('error',error);
-            } )
-
+          addItem( { id : 1 , title : "Dosa" } );
         }
     }, [recipeData])
   return (

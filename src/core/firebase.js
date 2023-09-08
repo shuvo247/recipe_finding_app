@@ -10,14 +10,13 @@ import { getFirestore } from "firebase/firestore";
 //     appId: process.ENV.APP_ID,
 //     measurementId: process.ENV.MEASUREMENT_ID
 // };
-const firebaseConfig = {
-    apiKey: "AIzaSyDx9CdK08ucdj2ji3OR202wrrRW7Oh-7j0",
-    authDomain: "recipe-finding-app.firebaseapp.com",
-    projectId: "recipe-finding-app",
-    storageBucket: "recipe-finding-app.appspot.com",
-    messagingSenderId: "321115652248",
-    appId: "1:321115652248:web:edc9de8d552c3e24ba90ed",
-    measurementId: "G-D139NPS0H1"
+  const firebaseConfig = {
+    apiKey: "AIzaSyCJcvi5R2HbpxGDNMCPYM-sxBDlBdPkn3U",
+    authDomain: "recipe-app-720f2.firebaseapp.com",
+    projectId: "recipe-app-720f2",
+    storageBucket: "recipe-app-720f2.appspot.com",
+    messagingSenderId: "949281821801",
+    appId: "1:949281821801:web:c23ff2fc4e63330c8afef8"
   };
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
