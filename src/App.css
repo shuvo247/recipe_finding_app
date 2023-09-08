@@ -79,6 +79,7 @@ h2 {
 
 .main {
   background: #f8f8f8;
+  background-color: #093f45;
   padding-bottom: 150px 0; }
 
 .clear {
@@ -94,18 +95,11 @@ body {
 
 .container {
   width: 900px;
-  background: #fff;
+  /* background: #fff; */
   margin: 0 auto;
-  box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-  -o-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-  -ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-  border-radius: 20px;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -o-border-radius: 20px;
-  -ms-border-radius: 20px; }
+  /* box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05); */
+  /* border-radius: 20px; */
+}
 
 .display-flex {
   justify-content: space-between;
@@ -155,7 +149,10 @@ body {
   margin: 0 55px; }
 
 .form-title {
-  margin-bottom: 33px; }
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+}
 
 .signup-image {
   margin-top: 45px; }
@@ -209,14 +206,14 @@ figure {
   .form-group:last-child {
     margin-bottom: 0px; }
 
-input {
-  width: 100%;
-  display: block;
-  border: none;
-  border-bottom: 1px solid #999;
-  padding: 6px 30px;
-  font-family: Poppins;
-  box-sizing: border-box; }
+  input,textarea {
+      width: 100%;
+      display: block;
+      padding: 12px 10px;
+      font-family: Poppins;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+  }
   input::-webkit-input-placeholder {
     color: #999; }
   input::-moz-placeholder {
@@ -225,16 +222,9 @@ input {
     color: #999; }
   input:-moz-placeholder {
     color: #999; }
-  input:focus {
-    border-bottom: 1px solid #222; }
-    input:focus::-webkit-input-placeholder {
-      color: #222; }
-    input:focus::-moz-placeholder {
-      color: #222; }
-    input:focus:-ms-input-placeholder {
-      color: #222; }
-    input:focus:-moz-placeholder {
-      color: #222; }
+  input:focus,textarea:focus {
+    border-bottom: 1px solid #6dabe4; 
+  }
 
 input[type=checkbox]:not(old) {
   width: 2em;
@@ -342,8 +332,9 @@ label.valid {
   font-size: 18px; }
 
 .signin-content {
-  padding-top: 67px;
-  padding-bottom: 87px; }
+  padding: 10px 0;
+  justify-content: center;
+}
 
 .social-login {
   align-items: center;
@@ -398,8 +389,10 @@ label.valid {
   background: #e72734; }
 
 .signin-form {
-  margin-right: 90px;
-  margin-left: 80px; }
+  border: 1px solid #ddd;
+  padding: 20px 40px;
+  box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+}
 
 .signin-image {
   margin-left: 110px;
@@ -480,11 +473,17 @@ label.valid {
     margin-right: 0px;
     margin-bottom: 10px; } }
 .header-wrapper {
-  margin-bottom: 120px;
+  margin-bottom: 60px;
+}
+.footer-wrapper {
+  margin-top: 60px;
 }
 .header-wrapper, .footer-wrapper {
   background-color: #282c34;
-
+  padding: 20px 0;
+}
+.footer-wrapper h4 {
+  margin: 0;
 }
 .header {
   display: flex;
@@ -517,7 +516,10 @@ label.valid {
   text-align: center;
   color: #fff;
 }
-
+.user ul {
+  margin: 0;
+  padding: 0;
+}
 .user ul li {
   color: #fff;
 }
@@ -535,4 +537,17 @@ label.valid {
 .user ul li {
   list-style: none;
   font-size: 16px;
+}
+.recipes-wrapper {
+  margin-top: 30px;
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.recipe img {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
 }

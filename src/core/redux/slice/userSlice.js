@@ -7,13 +7,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      // Update the user object with the data from the action payload
-      state.user = action.payload;
+      if( action.payload !== undefined ) {
+        state.user = action.payload;
+      }
     },
     clearUser: (state) => {
-      // Clear the user object
       state.user = {};
-    },
+    }
   },
 });
 
