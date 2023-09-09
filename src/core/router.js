@@ -7,9 +7,11 @@ import Login from '../components/auth/Login';
 import Register from '../components/auth/Register';
 import MainLayouts from '../components/layouts/MainLayouts';
 import AddRecipe from '../components/recipe/AddRecipe';
+import RecipeList from '../components/recipe/RecipeList';
 import addRecipe from './actions/addRecipe';
 import loginAction from './actions/loginAction';
 import registerAction from './actions/registerAction';
+import AuthMiddleware from './middleware/AuthMiddleware';
 
 export const router = createBrowserRouter([
     {
@@ -18,8 +20,13 @@ export const router = createBrowserRouter([
         element: <MainLayouts/>,
         children: [
             {
-                index : true,
-                element: <Home/>
+                element : <AuthMiddleware/>,
+                children : [
+                    {
+                        index : true,
+                        element: <Home/>
+                    },
+                ]
             },
             {
                 path : '/login',
@@ -35,6 +42,10 @@ export const router = createBrowserRouter([
                 path : '/add-recipe',
                 element: <AddRecipe/>,
                 action:  addRecipe,
+            },
+            {
+                path : '/recipe-list',
+                element: <RecipeList/>
             }
         ]
     },

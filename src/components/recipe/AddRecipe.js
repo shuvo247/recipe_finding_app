@@ -1,29 +1,30 @@
 import { addDoc, collection } from "firebase/firestore";
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { Form, useActionData } from 'react-router-dom';
+import { Form, Link, useActionData, useNavigate } from 'react-router-dom';
 import db from "../../core/firebase";
 import { setRecipe } from "../../core/redux/slice/recipeSlice";
 
 const AddRecipe = () => {
-    const [loading,setLoading] = useState(false);
     const [error,setError] = useState("");
     let recipeData = useActionData();
     const dispatch = useDispatch();
-    const state = useSelector( (state) => state );
-    console.log('state',state);
+    const user = useSelector( (state) => state.user.user );
+    const navigate = useNavigate();
     // Add recipe 
-    const addRecipe = useCallback(async (item) => {
+    const addRecipe = useCallback(async (recipe) => {
       try {
         // Add recipe to Firebase and Redux store
-        const docRef = await addDoc(collection(db, "items"), item);
-        item.id = docRef.id;
-        dispatch(setRecipe(item));
+        const recipeRef = await addDoc(collection(db, "recipes"), recipe);
+        recipe.id = recipeRef.id;
+        recipe.user_name = user?.displayName;
+        dispatch(setRecipe(recipe));
+        navigate('/recipe-list');
         // setLoading(false);
       } catch (error) {
-        setError(error);
+        setError(error.message);
       }
-    }, [dispatch, setError]);
+    }, [dispatch, setError,navigate,user]);
     useEffect(() => {
         if( recipeData !== undefined ) {
           // setLoading(true);
@@ -33,9 +34,13 @@ const AddRecipe = () => {
   return (
     <section className="sign-in">
       <div className="container">
+        <div className="recipe-list">
+            <Link to="/recipe-list">Recipe List</Link>
+        </div>
         <div className="signin-content">
           <div className="signin-form">
             <h2 className="form-title">Add Recipe</h2>
+            { error }
             <Form method="POST" action="/add-recipe" className="register-form" id="login-form">
               <div className="form-group">
                   <label htmlFor="recipe_name"><i className="zmdi zmdi-account material-icons-name" /></label>
@@ -54,15 +59,6 @@ const AddRecipe = () => {
               </div>
             </Form>
           </div>
-        </div>
-        <div className="recipes-wrapper">
-            { state?.recipes.length > 0 && state.recipes?.map( (recipe) => (
-              <div key={ recipe.id ? recipe.id : Math.random() } className="recipe">
-                <img src={ recipe?.image_url } alt="" />
-                <h4>{ recipe?.recipe_name }</h4>
-                <p>{ recipe?.description }</p>
-            </div>
-            ) ) }
         </div>
       </div>
   </section>

@@ -7,10 +7,10 @@ export const fetchRecipes = createAsyncThunk('recipes/fetchRecipes', async () =>
     const querySnapshot = await getDocs(recipeCollectionRef);
     const recipes = [];
     querySnapshot.forEach((doc) => {
-        console.log('doc',doc.data());
-      recipes.push(doc.data());
+      const recipeData = doc.data();
+      recipeData.id = doc.id;
+      recipes.push(recipeData);
     });
-  
     return recipes;
   });
 
@@ -21,15 +21,17 @@ const recipeSlice = createSlice({
     setRecipe: (state, action) => {
         state.push(action.payload);
     },
+    deleteRecipe: ( state, action ) => {
+      return state.filter((recipe) => recipe.id !== action.payload);
+    }
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchRecipes.fulfilled, (state, action) => {
-        console.log('state',action);
-        state.push(action.payload);
+        return state = action.payload;
       })
   },
 });
 
-export const { setRecipe } = recipeSlice.actions;
+export const { setRecipe,deleteRecipe } = recipeSlice.actions;
 export default recipeSlice.reducer;
